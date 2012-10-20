@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F0D50B79-0992-454E-9BD7-4751848B7401}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FuzzySim</RootNamespace>
+    <AssemblyName>FuzzySim</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Rendering\Line.cs" />
+    <Compile Include="Simulators\AISimulator.cs" />
+    <Compile Include="Rendering\BitmapOperations.cs" />
+    <Compile Include="Rendering\Drawable.cs" />
+    <Compile Include="Rendering\PrintText.cs" />
+    <Compile Include="Rendering\SimFrame.cs" />
+    <Compile Include="Core\Debug.cs" />
+    <Compile Include="Rendering\Frame.cs" />
+    <Compile Include="FrameManager.cs" />
+    <Compile Include="Core\FuzzyCollection.cs" />
+    <Compile Include="Controls\FuzzyRenderer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FuzzyRenderer.Designer.cs">
+      <DependentUpon>FuzzyRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rendering\FuzzySetFrame.cs" />
+    <Compile Include="Simulators\HarrierSim\HarrierController.cs" />
+    <Compile Include="Simulators\HarrierSim\HarrierSim.cs" />
+    <Compile Include="Simulators\LanderSim\LanderController.cs" />
+    <Compile Include="Simulators\LanderSim\LanderSim.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Simulators\RandomalitySim\RandomalitySim.cs" />
+    <Compile Include="Rendering\Sprite.cs" />
+    <Compile Include="Rendering\Vec2.cs" />
+    <Compile Include="Core\Rule.cs" />
+    <Compile Include="Core\SimDifficultyEnum.cs" />
+    <Compile Include="Simulators\AIController.cs" />
+    <Compile Include="Core\SimulatorsEnum.cs" />
+    <Compile Include="Core\SimulatorStateEnum.cs" />
+    <Compile Include="Simulators\SimVars.cs" />
+    <Compile Include="Rendering\SpriteList.cs" />
+    <Compile Include="Simulators\TextSim\TextController.cs" />
+    <Compile Include="Simulators\TextSim\TextSim.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TraceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TraceForm.Designer.cs">
+      <DependentUpon>TraceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\FuzzyRenderer.resx">
+      <DependentUpon>FuzzyRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TraceForm.resx">
+      <DependentUpon>TraceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="ClassDiagram.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharpLua\CFLS\CFLS.csproj">
+      <Project>{F910A183-214F-4005-ACE9-CF01620E3DB5}</Project>
+      <Name>CFLS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Anzac.png" />
+    <Content Include="Images\AustraliaLPH1.png" />
+    <Content Include="Images\AV8b.png" />
+    <Content Include="Images\AV8bLand.png" />
+    <Content Include="Images\Enterprise.png" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\explode.png" />
+    <Content Include="Images\GR1.png" />
+    <Content Include="Images\GR1land.png" />
+    <Content Include="Images\Lander.png" />
+    <Content Include="Images\Lander3.png" />
+    <Content Include="Images\l_thrust.png" />
+    <Content Include="Images\moonSurface.jpg" />
+    <Content Include="Images\moonSurface1.jpg" />
+    <Content Include="Images\rock1.png" />
+    <Content Include="Images\rock4.png" />
+    <Content Include="Images\r_thrust.png" />
+    <Content Include="Images\sea.png" />
+    <Content Include="Images\thrust.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
