@@ -16,6 +16,7 @@ namespace FuzzySim.Simulators
     
     class HarrierController : AIController
     {
+        #region Variables
 
         /// <summary>
         /// The variables used for this simulation (Press 'F12') on 'HarrierVars'!
@@ -40,6 +41,8 @@ namespace FuzzySim.Simulators
 
         double _throttle;
         private double _tv;
+
+        #endregion
 
         #region Controls
 
@@ -209,8 +212,6 @@ namespace FuzzySim.Simulators
         {
             _throttle = 60;
             _tv = 0;
-
-            //Write your sets here...
 
             SetupHeightSets();
 
@@ -450,9 +451,9 @@ namespace FuzzySim.Simulators
             //Throttle Accumulator
             ThrottleAccum = new FuzzyCollection("Throttle Output", null)
                                 {
-                                    new FuzzySet("ThrottleOutput", 0, 100)
+                                    new FuzzySet("ThrottleOutput", 0, 120)
                                 };
-            ThrottleAccum["ThrottleOutput"].SetRangeWithPoints(0, 100);
+            ThrottleAccum["ThrottleOutput"].SetRangeWithPoints(0, 120);
 
 
             //ThrustVector Accumulator
@@ -477,8 +478,8 @@ namespace FuzzySim.Simulators
 
             for (int i = 0; i < tRules; i++)
             {
-                RuleSetThrottle.Add(new FuzzySet("Rule" + i.ToString(), 0, 100) { LineColour = ruleColours[i] });
-                RuleSetThrottle["Rule" + i.ToString()].SetRangeWithPoints(0, 100);
+                RuleSetThrottle.Add(new FuzzySet("Rule" + i.ToString(), 0, 120) { LineColour = ruleColours[i] });
+                RuleSetThrottle["Rule" + i.ToString()].SetRangeWithPoints(0, 120);
             }
 
             for (int i = 0; i < tvRules; i++)
