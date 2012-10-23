@@ -84,13 +84,13 @@ namespace FuzzySim.Simulators
             //
 
             sendToOutputWindow.Add(HeightSets);
-            sendToOutputWindow.Add(DistanceSets);
+            //sendToOutputWindow.Add(DistanceSets);
 
             sendToOutputWindow.Add(YVelocitySets);
-            sendToOutputWindow.Add(XVelocitySets);
+            //sendToOutputWindow.Add(XVelocitySets);
 
             sendToOutputWindow.Add(ThrottleSets);
-            sendToOutputWindow.Add(ThrustVecSets);
+            //sendToOutputWindow.Add(ThrustVecSets);
 
             sendToOutputWindow.Add(ThrottleAccum);
             sendToOutputWindow.Add(ThrustVecAccum);
@@ -106,7 +106,14 @@ namespace FuzzySim.Simulators
             //START
             harrier = ((HarrierSim)Globals.Simulator).Harrier;
 
-            double height = harrier.Y;
+            double height;
+
+            if (Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Easy) || 
+                Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Medium))
+                height = harrier.Y - 23;
+            else
+                height = harrier.Y;
+
             double speedY = harrier.YVel;
             double speedX = harrier.XVel;
             double safeX = harrier.X - harrier.MidSafeX - 40;
@@ -154,20 +161,20 @@ namespace FuzzySim.Simulators
             RuleSetThrottle["Rule7"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule7"]);
 
             // if height is medium and Y vel is safe then throttle is low
-            RuleSetThrottle["Rule8"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule8"]);
+            RuleSetThrottle["Rule8"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule8"]);
 
 
             // if height is low and Y vel is high then throttle is high
             RuleSetThrottle["Rule9"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule9"]);
 
             // if height is low and Y vel is moderate then throttle is medium
-            RuleSetThrottle["Rule10"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule10"]);
+            RuleSetThrottle["Rule10"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule10"]);
 
             // if height is low and Y vel is low then throttle is medium
             RuleSetThrottle["Rule11"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule11"]);
 
             // if height is low and Y vel is safe then throttle is low
-            RuleSetThrottle["Rule12"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule12"]);
+            RuleSetThrottle["Rule12"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule12"]);
 
 
             // if height is landing and Y vel is high then throttle is high
@@ -177,13 +184,21 @@ namespace FuzzySim.Simulators
             RuleSetThrottle["Rule14"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule14"]);
 
             // if height is landing and Y vel is low then throttle  is medium
-            RuleSetThrottle["Rule15"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule15"]);
+            RuleSetThrottle["Rule15"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule15"]);
 
             // if height is landing and Y vel is safe then throttle is low
-            RuleSetThrottle["Rule16"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule16"]);
+            RuleSetThrottle["Rule16"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule16"]);
 
             #endregion
 
+            #region Medium Rules
+
+
+
+            #endregion
+
+            ThrottleAccum["ThrottleOutput"] = new FuzzySet(throttleOutput);
+            ThrustVecAccum["ThrustVector"] = new FuzzySet(thrustVectorOutput);
 
             //Switch for how to adjust throttle settings ('AutoPilot' Checkbox on form)
             if (!Manual)
@@ -215,15 +230,15 @@ namespace FuzzySim.Simulators
 
             SetupHeightSets();
 
-            SetupDistanceSets();
+            //SetupDistanceSets();
 
             SetupThrottleSets();
 
-            SetupXVelocitySets();
+            //SetupXVelocitySets();
 
             SetupYVelocitySets();
 
-            SetupThrustVecSets();
+            //SetupThrustVecSets();
 
             SetupRuleSets();
 
@@ -252,7 +267,8 @@ namespace FuzzySim.Simulators
             HeightSets["Landing Height"].AddPoint(-20, 0, false, false);
             HeightSets["Landing Height"].AddPoint(-5, 0, false, false);
             HeightSets["Landing Height"].AddPoint(0, 1, false, false);
-            HeightSets["Landing Height"].AddPoint(5, 0, false, false);
+            HeightSets["Landing Height"].AddPoint(5, 1, false, false);
+            HeightSets["Landing Height"].AddPoint(10, 0, false, false);
             HeightSets["Landing Height"].AddPoint(400, 0, false, false);
 
             HeightSets["Low Height"].AddPoint(-20, 0, false, false);
@@ -354,10 +370,58 @@ namespace FuzzySim.Simulators
         {
             XVelocitySets = new FuzzyCollection("XVelocity Sets", null)
             {
-                new FuzzySet("Left Velocity", -20, 20) { LineColour = new SolidBrush(Color.Blue) },
-                new FuzzySet("Right Velocity", -20, 20) { LineColour = new SolidBrush(Color.Green) },
+                new FuzzySet("High Left Velocity", -20, 20) { LineColour = new SolidBrush(Color.Blue) },
+                new FuzzySet("Moderate Left Velocity", -20, 20) { LineColour = new SolidBrush(Color.Green) },
+                new FuzzySet("Low Left Velocity", -20, 20) { LineColour = new SolidBrush(Color.Yellow) },
+
+                new FuzzySet("Zero Velocity", -20, 20) { LineColour = new SolidBrush(Color.Orange) },
+
+                new FuzzySet("Low Right Velocity", -20, 20) { LineColour = new SolidBrush(Color.Red) },
+                new FuzzySet("Moderate Right Velocity", -20, 20) { LineColour = new SolidBrush(Color.Purple) },
+                new FuzzySet("High Right Velocity", -20, 20) { LineColour = new SolidBrush(Color.Pink) },
             };
 
+            XVelocitySets["High Left Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["High Left Velocity"].AddPoint(-12, 0, false, false);
+            XVelocitySets["High Left Velocity"].AddPoint(-14, 1, false, false);
+            XVelocitySets["High Left Velocity"].AddPoint(20, 0, false, false);
+            
+            XVelocitySets["Moderate Left Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["Moderate Left Velocity"].AddPoint(-8, 0, false, false);
+            XVelocitySets["Moderate Left Velocity"].AddPoint(-11, 1, false, false);
+            XVelocitySets["Moderate Left Velocity"].AddPoint(-14, 0, false, false);
+            XVelocitySets["Moderate Left Velocity"].AddPoint(20, 0, false, false);
+            
+            XVelocitySets["Low Left Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["Low Left Velocity"].AddPoint(-3, 0, false, false);
+            XVelocitySets["Low Left Velocity"].AddPoint(-6, 1, false, false);
+            XVelocitySets["Low Left Velocity"].AddPoint(-8, 1, false, false);
+            XVelocitySets["Low Left Velocity"].AddPoint(-10, 0, false, false);
+            XVelocitySets["Low Left Velocity"].AddPoint(20, 0, false, false);
+            
+            XVelocitySets["Zero Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["Zero Velocity"].AddPoint(-2, 0, false, false);
+            XVelocitySets["Zero Velocity"].AddPoint(0, 1, false, false);
+            XVelocitySets["Zero Velocity"].AddPoint(2, 0, false, false);
+            XVelocitySets["Zero Velocity"].AddPoint(20, 0, false, false);
+
+            XVelocitySets["Low Right Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["Low Right Velocity"].AddPoint(3, 0, false, false);
+            XVelocitySets["Low Right Velocity"].AddPoint(6, 1, false, false);
+            XVelocitySets["Low Right Velocity"].AddPoint(8, 1, false, false);
+            XVelocitySets["Low Right Velocity"].AddPoint(10, 0, false, false);
+            XVelocitySets["Low Right Velocity"].AddPoint(20, 0, false, false);
+
+            XVelocitySets["Moderate Right Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["Moderate Right Velocity"].AddPoint(8, 0, false, false);
+            XVelocitySets["Moderate Right Velocity"].AddPoint(11, 1, false, false);
+            XVelocitySets["Moderate Right Velocity"].AddPoint(14, 0, false, false);
+            XVelocitySets["Moderate Right Velocity"].AddPoint(20, 0, false, false);
+
+            XVelocitySets["High Right Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["High Right Velocity"].AddPoint(12, 0, false, false);
+            XVelocitySets["High Right Velocity"].AddPoint(14, 1, false, false);
+            XVelocitySets["High Right Velocity"].AddPoint(20, 1, false, false);
         }
 
         /// <summary>
