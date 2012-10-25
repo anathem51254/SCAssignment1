@@ -84,13 +84,13 @@ namespace FuzzySim.Simulators
             //
 
             sendToOutputWindow.Add(HeightSets);
-            //sendToOutputWindow.Add(DistanceSets);
+            sendToOutputWindow.Add(DistanceSets);
 
             sendToOutputWindow.Add(YVelocitySets);
-            //sendToOutputWindow.Add(XVelocitySets);
+            sendToOutputWindow.Add(XVelocitySets);
 
             sendToOutputWindow.Add(ThrottleSets);
-            //sendToOutputWindow.Add(ThrustVecSets);
+            sendToOutputWindow.Add(ThrustVecSets);
 
             sendToOutputWindow.Add(ThrottleAccum);
             sendToOutputWindow.Add(ThrustVecAccum);
@@ -193,6 +193,38 @@ namespace FuzzySim.Simulators
 
             #region Medium Rules
 
+            #region Rule 0: if distance is left high dangerzone then thrust vector is forward high thrust
+
+            RuleSetThrustVec["Rule0"] = Rule.IS(safeX, DistanceSets["Left High Dangerzone"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]); 
+
+            /*
+            // if distance is left high dangerzone and X vel is high left then thrust vector is forward high thrust
+            RuleSetThrustVec["Rule0"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]);
+
+            // if distance is left high dangerzone and X vel is moderate left then thrust vector is forward high thrust
+            RuleSetThrustVec["Rule1"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule1"]);
+
+            // if distance is left high dangerzone and X vel is Low left then thrust vector is forward high thrust
+            RuleSetThrustVec["Rule2"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
+
+            // if distance is left high dangerzone and X vel is Neutral then thrust vector is forward high thrust
+            RuleSetThrustVec["Rule3"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
+            */
+
+            #endregion
+
+            // if distance is left moderate dangerzone and X vel is high left then thrust vector is forward moderate thrust
+            RuleSetThrustVec["Rule1"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule1"]);
+
+            // if distance is left moderate dangerzone and X vel is moderate left then thrust vector is forward moderate thrust
+            RuleSetThrustVec["Rule2"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule2"]);
+
+            // if distance is left moderate dangerzone and X vel is low left then thrust vector is forward high thrust
+            RuleSetThrustVec["Rule3"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
+
+            // if distance is left moderate dangerzone and X vel is neutral then thrust vector is forward high thrust
+            RuleSetThrustVec["Rule4"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule4"]);
+
 
 
             #endregion
@@ -230,15 +262,15 @@ namespace FuzzySim.Simulators
 
             SetupHeightSets();
 
-            //SetupDistanceSets();
+            SetupDistanceSets();
 
             SetupThrottleSets();
 
-            //SetupXVelocitySets();
+            SetupXVelocitySets();
 
             SetupYVelocitySets();
 
-            //SetupThrustVecSets();
+            SetupThrustVecSets();
 
             SetupRuleSets();
 
@@ -299,24 +331,61 @@ namespace FuzzySim.Simulators
         {
             DistanceSets = new FuzzyCollection("Distance Sets", null)
             {
-                new FuzzySet("Safe Zone", -50, 50) { LineColour = new SolidBrush(Color.Blue) },
-                new FuzzySet("Low Dangerzone", -50, 50) { LineColour = new SolidBrush(Color.Green) },
-                new FuzzySet("Moderate Dangerzone", -50, 50) { LineColour = new SolidBrush(Color.Yellow) },
-                new FuzzySet("High Dangerzone", -50, 50) { LineColour = new SolidBrush(Color.Orange) }
+                new FuzzySet("Left High Dangerzone", -1000, 1000) { LineColour = new SolidBrush(Color.Blue) },
+                new FuzzySet("Left Moderate Dangerzone", -1000, 1000) { LineColour = new SolidBrush(Color.Green) },
+                new FuzzySet("Left Low Dangerzone", -1000, 1000) { LineColour = new SolidBrush(Color.Yellow) },
+
+                new FuzzySet("Safe Zone", -1000, 1000) { LineColour = new SolidBrush(Color.Orange) },
+
+                new FuzzySet("Right Low Dangerzone", -1000, 1000) { LineColour = new SolidBrush(Color.Red) },
+                new FuzzySet("Right Moderate Dangerzone", -1000, 1000) { LineColour = new SolidBrush(Color.Purple) },
+                new FuzzySet("Right High Dangerzone", -1000, 1000) { LineColour = new SolidBrush(Color.Pink) }
             };
 
-            DistanceSets["Safe Zone"].AddPoint(-50, 0, false, false);
-            DistanceSets["Safe Zone"].AddPoint(-7, 0, false, false);
-            DistanceSets["Safe Zone"].AddPoint(-2, 1, false, false);
-            DistanceSets["Safe Zone"].AddPoint(2, 1, false, false);
-            DistanceSets["Safe Zone"].AddPoint(7, 0, false, false);
-            DistanceSets["Safe Zone"].AddPoint(50, 0, false, false);
+            DistanceSets["Safe Zone"].AddPoint(-1000, 0, false, false);
+            DistanceSets["Safe Zone"].AddPoint(100, 0, false, false);
+            DistanceSets["Safe Zone"].AddPoint(125, 1, false, false);
+            DistanceSets["Safe Zone"].AddPoint(150, 1, false, false);
+            DistanceSets["Safe Zone"].AddPoint(175, 0, false, false);
+            DistanceSets["Safe Zone"].AddPoint(1000, 0, false, false);
 
-            DistanceSets["Low Dangerzone"].AddPoint(-50, 0, false, false);
-            DistanceSets["Low Dangerzone"].AddPoint(0, 0, false, false);
-            DistanceSets["Low Dangerzone"].AddPoint(0, 0, false, false);
-            DistanceSets["Low Dangerzone"].AddPoint(0, 0, false, false);
+            DistanceSets["Left Low Dangerzone"].AddPoint(-1000, 0, false, false);
+            DistanceSets["Left Low Dangerzone"].AddPoint(50, 0, false, false);
+            DistanceSets["Left Low Dangerzone"].AddPoint(80, 1, false, false);
+            DistanceSets["Left Low Dangerzone"].AddPoint(90, 1, false, false);
+            DistanceSets["Left Low Dangerzone"].AddPoint(110, 0, false, false);
+            DistanceSets["Left Low Dangerzone"].AddPoint(1000, 0, false, false);
 
+            DistanceSets["Right Low Dangerzone"].AddPoint(-1000, 0, false, false);
+            DistanceSets["Right Low Dangerzone"].AddPoint(160, 0, false, false);
+            DistanceSets["Right Low Dangerzone"].AddPoint(190, 1, false, false);
+            DistanceSets["Right Low Dangerzone"].AddPoint(200, 1, false, false);
+            DistanceSets["Right Low Dangerzone"].AddPoint(230, 0, false, false);
+            DistanceSets["Right Low Dangerzone"].AddPoint(1000, 0, false, false);
+
+            DistanceSets["Left Moderate Dangerzone"].AddPoint(-1000, 0, false, false);
+            DistanceSets["Left Moderate Dangerzone"].AddPoint(-45, 0, false, false);
+            DistanceSets["Left Moderate Dangerzone"].AddPoint(0, 1, false, false);
+            DistanceSets["Left Moderate Dangerzone"].AddPoint(20, 1, false, false);
+            DistanceSets["Left Moderate Dangerzone"].AddPoint(65, 0, false, false);
+            DistanceSets["Left Moderate Dangerzone"].AddPoint(1000, 0, false, false);
+
+            DistanceSets["Right Moderate Dangerzone"].AddPoint(-1000, 0, false, false);
+            DistanceSets["Right Moderate Dangerzone"].AddPoint(215, 0, false, false);
+            DistanceSets["Right Moderate Dangerzone"].AddPoint(260, 1, false, false);
+            DistanceSets["Right Moderate Dangerzone"].AddPoint(280, 1, false, false);
+            DistanceSets["Right Moderate Dangerzone"].AddPoint(325, 0, false, false);
+            DistanceSets["Right Moderate Dangerzone"].AddPoint(1000, 0, false, false);
+
+            DistanceSets["Left High Dangerzone"].AddPoint(-1000, 1, false, false);
+            DistanceSets["Left High Dangerzone"].AddPoint(-60, 1, false, false);
+            DistanceSets["Left High Dangerzone"].AddPoint(-30, 0, false, false);
+            DistanceSets["Left High Dangerzone"].AddPoint(1000, 0, false, false);
+
+            DistanceSets["Right High Dangerzone"].AddPoint(-1000, 0, false, false);
+            DistanceSets["Right High Dangerzone"].AddPoint(310, 0, false, false);
+            DistanceSets["Right High Dangerzone"].AddPoint(340, 1, false, false);
+            DistanceSets["Right High Dangerzone"].AddPoint(1000, 1, false, false);
         }
 
         /// <summary>
@@ -374,53 +443,51 @@ namespace FuzzySim.Simulators
                 new FuzzySet("Moderate Left Velocity", -20, 20) { LineColour = new SolidBrush(Color.Green) },
                 new FuzzySet("Low Left Velocity", -20, 20) { LineColour = new SolidBrush(Color.Yellow) },
 
-                new FuzzySet("Zero Velocity", -20, 20) { LineColour = new SolidBrush(Color.Orange) },
+                new FuzzySet("Neutral Velocity", -20, 20) { LineColour = new SolidBrush(Color.Orange) },
 
                 new FuzzySet("Low Right Velocity", -20, 20) { LineColour = new SolidBrush(Color.Red) },
                 new FuzzySet("Moderate Right Velocity", -20, 20) { LineColour = new SolidBrush(Color.Purple) },
                 new FuzzySet("High Right Velocity", -20, 20) { LineColour = new SolidBrush(Color.Pink) },
             };
 
-            XVelocitySets["High Left Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["High Left Velocity"].AddPoint(-20, 1, false, false);
+            XVelocitySets["High Left Velocity"].AddPoint(-15, 1, false, false);
             XVelocitySets["High Left Velocity"].AddPoint(-12, 0, false, false);
-            XVelocitySets["High Left Velocity"].AddPoint(-14, 1, false, false);
             XVelocitySets["High Left Velocity"].AddPoint(20, 0, false, false);
             
             XVelocitySets["Moderate Left Velocity"].AddPoint(-20, 0, false, false);
-            XVelocitySets["Moderate Left Velocity"].AddPoint(-8, 0, false, false);
-            XVelocitySets["Moderate Left Velocity"].AddPoint(-11, 1, false, false);
-            XVelocitySets["Moderate Left Velocity"].AddPoint(-14, 0, false, false);
+            XVelocitySets["Moderate Left Velocity"].AddPoint(-13, 0, false, false);
+            XVelocitySets["Moderate Left Velocity"].AddPoint(-10, 1, false, false);
+            XVelocitySets["Moderate Left Velocity"].AddPoint(-7, 0, false, false);
             XVelocitySets["Moderate Left Velocity"].AddPoint(20, 0, false, false);
             
             XVelocitySets["Low Left Velocity"].AddPoint(-20, 0, false, false);
-            XVelocitySets["Low Left Velocity"].AddPoint(-3, 0, false, false);
-            XVelocitySets["Low Left Velocity"].AddPoint(-6, 1, false, false);
-            XVelocitySets["Low Left Velocity"].AddPoint(-8, 1, false, false);
-            XVelocitySets["Low Left Velocity"].AddPoint(-10, 0, false, false);
+            XVelocitySets["Low Left Velocity"].AddPoint(-8, 0, false, false);
+            XVelocitySets["Low Left Velocity"].AddPoint(-5, 1, false, false);
+            XVelocitySets["Low Left Velocity"].AddPoint(-1, 0, false, false);
             XVelocitySets["Low Left Velocity"].AddPoint(20, 0, false, false);
             
-            XVelocitySets["Zero Velocity"].AddPoint(-20, 0, false, false);
-            XVelocitySets["Zero Velocity"].AddPoint(-2, 0, false, false);
-            XVelocitySets["Zero Velocity"].AddPoint(0, 1, false, false);
-            XVelocitySets["Zero Velocity"].AddPoint(2, 0, false, false);
-            XVelocitySets["Zero Velocity"].AddPoint(20, 0, false, false);
+            XVelocitySets["Neutral Velocity"].AddPoint(-20, 0, false, false);
+            XVelocitySets["Neutral Velocity"].AddPoint(-2, 0, false, false);
+            XVelocitySets["Neutral Velocity"].AddPoint(0, 1, false, false);
+            XVelocitySets["Neutral Velocity"].AddPoint(2, 0, false, false);
+            XVelocitySets["Neutral Velocity"].AddPoint(20, 0, false, false);
 
             XVelocitySets["Low Right Velocity"].AddPoint(-20, 0, false, false);
-            XVelocitySets["Low Right Velocity"].AddPoint(3, 0, false, false);
-            XVelocitySets["Low Right Velocity"].AddPoint(6, 1, false, false);
-            XVelocitySets["Low Right Velocity"].AddPoint(8, 1, false, false);
-            XVelocitySets["Low Right Velocity"].AddPoint(10, 0, false, false);
+            XVelocitySets["Low Right Velocity"].AddPoint(1, 0, false, false);
+            XVelocitySets["Low Right Velocity"].AddPoint(5, 1, false, false);
+            XVelocitySets["Low Right Velocity"].AddPoint(8, 0, false, false);
             XVelocitySets["Low Right Velocity"].AddPoint(20, 0, false, false);
 
             XVelocitySets["Moderate Right Velocity"].AddPoint(-20, 0, false, false);
-            XVelocitySets["Moderate Right Velocity"].AddPoint(8, 0, false, false);
-            XVelocitySets["Moderate Right Velocity"].AddPoint(11, 1, false, false);
-            XVelocitySets["Moderate Right Velocity"].AddPoint(14, 0, false, false);
+            XVelocitySets["Moderate Right Velocity"].AddPoint(7, 0, false, false);
+            XVelocitySets["Moderate Right Velocity"].AddPoint(10, 1, false, false);
+            XVelocitySets["Moderate Right Velocity"].AddPoint(13, 0, false, false);
             XVelocitySets["Moderate Right Velocity"].AddPoint(20, 0, false, false);
 
             XVelocitySets["High Right Velocity"].AddPoint(-20, 0, false, false);
             XVelocitySets["High Right Velocity"].AddPoint(12, 0, false, false);
-            XVelocitySets["High Right Velocity"].AddPoint(14, 1, false, false);
+            XVelocitySets["High Right Velocity"].AddPoint(15, 1, false, false);
             XVelocitySets["High Right Velocity"].AddPoint(20, 1, false, false);
         }
 
@@ -477,34 +544,54 @@ namespace FuzzySim.Simulators
             {
                 new FuzzySet("Forward High Thrust", -5, 5) { LineColour = new SolidBrush(Color.Blue) },
                 new FuzzySet("Forward Moderate Thrust", -5, 5) { LineColour = new SolidBrush(Color.Green) },
+                new FuzzySet("Forward Low Thrust", -5, 5) { LineColour = new SolidBrush(Color.Yellow) },
 
-                new FuzzySet("No Thrust", -5, 5) { LineColour = new SolidBrush(Color.Yellow) },
+                new FuzzySet("Neutral Thrust", -5, 5) { LineColour = new SolidBrush(Color.Orange) },
                 
-                new FuzzySet("Backward Moderate Thrust", -5, 5) { LineColour = new SolidBrush(Color.Orange) },
-                new FuzzySet("Backward High Thrust", -5, 5) { LineColour = new SolidBrush(Color.Red) }
+                new FuzzySet("Backward Low Thrust", -5, 5) { LineColour = new SolidBrush(Color.Red) },
+                new FuzzySet("Backward Moderate Thrust", -5, 5) { LineColour = new SolidBrush(Color.Purple) },
+                new FuzzySet("Backward High Thrust", -5, 5) { LineColour = new SolidBrush(Color.Pink) }
             };
 
-            ThrustVecSets["Forward High Thrust"].AddPoint(-5, 0, false, false);
-            ThrustVecSets["Forward High Thrust"].AddPoint(0, 1, false, false);
+            ThrustVecSets["Forward High Thrust"].AddPoint(-5, 1, false, false);
+            ThrustVecSets["Forward High Thrust"].AddPoint(-4.5, 1, false, false);
+            ThrustVecSets["Forward High Thrust"].AddPoint(-3.5, 0, false, false);
             ThrustVecSets["Forward High Thrust"].AddPoint(5, 0, false, false);
 
             ThrustVecSets["Forward Moderate Thrust"].AddPoint(-5, 0, false, false);
-            ThrustVecSets["Forward Moderate Thrust"].AddPoint(0, 1, false, false);
+            ThrustVecSets["Forward Moderate Thrust"].AddPoint(-4, 0, false, false);
+            ThrustVecSets["Forward Moderate Thrust"].AddPoint(-3.5, 1, false, false);
+            ThrustVecSets["Forward Moderate Thrust"].AddPoint(-2, 0, false, false);
             ThrustVecSets["Forward Moderate Thrust"].AddPoint(5, 0, false, false);
 
-            ThrustVecSets["No Thrust"].AddPoint(-5, 0, false, false);
-            ThrustVecSets["No Thrust"].AddPoint(-1, 0, false, false);
-            ThrustVecSets["No Thrust"].AddPoint(0, 1, false, false);
-            ThrustVecSets["No Thrust"].AddPoint(1, 0, false, false);
-            ThrustVecSets["No Thrust"].AddPoint(5, 0, false, false);
+            ThrustVecSets["Forward Low Thrust"].AddPoint(-5, 0, false, false);
+            ThrustVecSets["Forward Low Thrust"].AddPoint(-2.5, 0, false, false);
+            ThrustVecSets["Forward Low Thrust"].AddPoint(-2, 1, false, false);
+            ThrustVecSets["Forward Low Thrust"].AddPoint(-1, 0, false, false);
+            ThrustVecSets["Forward Low Thrust"].AddPoint(5, 0, false, false);
+
+            ThrustVecSets["Neutral Thrust"].AddPoint(-5, 0, false, false);
+            ThrustVecSets["Neutral Thrust"].AddPoint(-1.5, 0, false, false);
+            ThrustVecSets["Neutral Thrust"].AddPoint(0, 1, false, false);
+            ThrustVecSets["Neutral Thrust"].AddPoint(1.5, 0, false, false);
+            ThrustVecSets["Neutral Thrust"].AddPoint(5, 0, false, false);
+
+            ThrustVecSets["Backward Low Thrust"].AddPoint(-5, 0, false, false);
+            ThrustVecSets["Backward Low Thrust"].AddPoint(1, 0, false, false);
+            ThrustVecSets["Backward Low Thrust"].AddPoint(2, 1, false, false);
+            ThrustVecSets["Backward Low Thrust"].AddPoint(2.5, 0, false, false);
+            ThrustVecSets["Backward Low Thrust"].AddPoint(5, 0, false, false);
 
             ThrustVecSets["Backward Moderate Thrust"].AddPoint(-5, 0, false, false);
-            ThrustVecSets["Backward Moderate Thrust"].AddPoint(0, 1, false, false);
+            ThrustVecSets["Backward Moderate Thrust"].AddPoint(2, 0, false, false);
+            ThrustVecSets["Backward Moderate Thrust"].AddPoint(3.5, 1, false, false);
+            ThrustVecSets["Backward Moderate Thrust"].AddPoint(4, 0, false, false);
             ThrustVecSets["Backward Moderate Thrust"].AddPoint(5, 0, false, false);
 
             ThrustVecSets["Backward High Thrust"].AddPoint(-5, 0, false, false);
-            ThrustVecSets["Backward High Thrust"].AddPoint(0, 1, false, false);
-            ThrustVecSets["Backward High Thrust"].AddPoint(5, 0, false, false);
+            ThrustVecSets["Backward High Thrust"].AddPoint(3.5, 0, false, false);
+            ThrustVecSets["Backward High Thrust"].AddPoint(4.5, 1, false, false);
+            ThrustVecSets["Backward High Thrust"].AddPoint(5, 1, false, false);
         }
 
         /// <summary>

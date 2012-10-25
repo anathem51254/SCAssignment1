@@ -372,6 +372,7 @@ namespace FuzzySim.Simulators
             ret.AddTextWithShadow("wind", String.Format("ThrustVec, WindGust: \t {0}, {1}", Harrier.ThrustVector.ToString("F"), Harrier.WindSpeed.ToString("F")), new Vec2(x, 100), colour, shadow);
             ret.AddTextWithShadow("relative", String.Format("Speed Relative to Ship: \t  {0}", Harrier.RelativeXVel.ToString("F")), new Vec2(x, 120), colour, shadow);
             ret.AddTextWithShadow("shipsSpeed", String.Format("Ship Speed knots (mps) \t  {0}, {1}", Harrier.shipSpeed.ToString("F"), (Harrier.shipSpeed*Harrier.ConvertKnotsToMps).ToString("F")), new Vec2(x, 140), colour, shadow);
+            ret.AddTextWithShadow("safeX", String.Format("Safe X \t  {0}", (Harrier.X - Harrier.MidSafeX - 40).ToString("F")), new Vec2(x, 160), colour, shadow);
         }
 
         public override SimFrame DrawTurn(SimFrame frame)
