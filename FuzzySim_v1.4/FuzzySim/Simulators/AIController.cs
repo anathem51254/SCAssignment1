@@ -68,7 +68,18 @@ namespace FuzzySim.Simulators
                                                     new SolidBrush(Color.Green),
                                                     new SolidBrush(Color.Orange),
                                                     new SolidBrush(Color.HotPink),
-                                                    new SolidBrush(Color.Lavender)          //30
+                                                    new SolidBrush(Color.Lavender),          //30
+                                                    new SolidBrush(Color.Tan),
+                                                    new SolidBrush(Color.Thistle),
+                                                    new SolidBrush(Color.SteelBlue),
+                                                    new SolidBrush(Color.Navy),
+                                                    new SolidBrush(Color.Olive),
+                                                    new SolidBrush(Color.Snow),
+                                                    new SolidBrush(Color.RosyBrown),
+                                                    new SolidBrush(Color.RoyalBlue),
+                                                    new SolidBrush(Color.SaddleBrown),
+                                                    new SolidBrush(Color.SeaGreen),         //40
+                                                    new SolidBrush(Color.Salmon)
                                                                 //...and so on (for however many rules there are)
                                                 };
 

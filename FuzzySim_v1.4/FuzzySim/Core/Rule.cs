@@ -81,7 +81,7 @@
         /// <param name="fs3">Consequent Output</param>
         /// <param name="fs4">Consequent</param>
         /// <param name="ftemp">Rule Applicability Output Set</param>
-        public static FuzzySet OR(double val1, FuzzySet fs1, double val2, FuzzySet fs2, ref FuzzySet fs3, ref FuzzySet fs4,
+        public static FuzzySet OR(double val1, FuzzySet fs1, double val2, FuzzySet fs2, ref FuzzySet fs3, FuzzySet fs4,
                                FuzzySet ruleSet)
         {
             double lowRange = fs4.GetLowRange();

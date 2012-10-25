@@ -370,9 +370,9 @@ namespace FuzzySim.Simulators
             ret.AddTextWithShadow("consumption", String.Format("Secs, Fuel: \t\t {0}, {1}", ((double)Globals.TurnCount / Harrier.TickPerSecond).ToString("F"), Harrier.Fuel.ToString("F")), new Vec2(x, 60), colour, shadow);
             ret.AddTextWithShadow("physics", String.Format("Mass, Throttle: \t\t {0}, {1}", Harrier.Mass.ToString("F"), Harrier.Throttle.ToString("F")), new Vec2(x, 80), colour, shadow);
             ret.AddTextWithShadow("wind", String.Format("ThrustVec, WindGust: \t {0}, {1}", Harrier.ThrustVector.ToString("F"), Harrier.WindSpeed.ToString("F")), new Vec2(x, 100), colour, shadow);
-            ret.AddTextWithShadow("relative", String.Format("Speed Relative to Ship: \t  {0}", Harrier.RelativeXVel.ToString("F")), new Vec2(x, 120), colour, shadow);
-            ret.AddTextWithShadow("shipsSpeed", String.Format("Ship Speed knots (mps) \t  {0}, {1}", Harrier.shipSpeed.ToString("F"), (Harrier.shipSpeed*Harrier.ConvertKnotsToMps).ToString("F")), new Vec2(x, 140), colour, shadow);
-            ret.AddTextWithShadow("safeX", String.Format("Safe X \t  {0}", (Harrier.X - Harrier.MidSafeX - 40).ToString("F")), new Vec2(x, 160), colour, shadow);
+            ret.AddTextWithShadow("relative", String.Format("Speed Relative to Ship: \t {0}", Harrier.RelativeXVel.ToString("F")), new Vec2(x, 120), colour, shadow);
+            ret.AddTextWithShadow("shipsSpeed", String.Format("Ship Speed knots (mps): \t {0}, {1}", Harrier.shipSpeed.ToString("F"), (Harrier.shipSpeed*Harrier.ConvertKnotsToMps).ToString("F")), new Vec2(x, 140), colour, shadow);
+            ret.AddTextWithShadow("safeX", String.Format("Safe X: \t\t\t {0}", (Harrier.X - Harrier.MidSafeX - 40).ToString("F")), new Vec2(x, 160), colour, shadow);
         }
 
         public override SimFrame DrawTurn(SimFrame frame)
