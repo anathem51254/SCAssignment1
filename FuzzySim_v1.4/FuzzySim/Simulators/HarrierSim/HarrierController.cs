@@ -135,205 +135,460 @@ namespace FuzzySim.Simulators
 
             #region Throttle Rules
 
-            #region Y Velocity Height Rules
+            if (Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Hard) ||
+                    Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.VeryHard))
+            {
 
-            // if Y vel is up then throttle is no
-            RuleSetThrottle["Rule0"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule0"]);
+                #region Y Velocity Height Rules
 
-            // if height is high and Y vel is high then throttle is medium
-            RuleSetThrottle["Rule1"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule1"]);
+                // if Y vel is up then throttle is no
+                RuleSetThrottle["Rule0"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule0"]);
 
-            // if height is high and Y vel is moderate then throttle is medium
-            RuleSetThrottle["Rule2"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule2"]);
+                // if height is high and Y vel is high then throttle is medium
+                RuleSetThrottle["Rule1"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule1"]);
 
-            // if height is high and Y vel is low then throttle is low
-            RuleSetThrottle["Rule3"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule3"]);
+                // if height is high and Y vel is moderate then throttle is medium
+                RuleSetThrottle["Rule2"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule2"]);
 
-            // if height is high and Y vel is safe then throttle is low
-            RuleSetThrottle["Rule4"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule4"]);
+                // if height is high and Y vel is low then throttle is low
+                RuleSetThrottle["Rule3"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule3"]);
 
-
-            // if height is medium and Y vel is high then throttle is high
-            RuleSetThrottle["Rule5"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule5"]);
-
-            // if height is medium and Y vel is moderate then throttle is high
-            RuleSetThrottle["Rule6"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule6"]);
-
-            // if height is medium and Y vel is low then throttle is medium
-            RuleSetThrottle["Rule7"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule7"]);
-
-            // if height is medium and Y vel is safe then throttle is low
-            RuleSetThrottle["Rule8"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule8"]);
+                // if height is high and Y vel is safe then throttle is low
+                RuleSetThrottle["Rule4"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule4"]);
 
 
-            // if height is low and Y vel is high then throttle is high
-            RuleSetThrottle["Rule9"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule9"]);
+                // if height is medium and Y vel is high then throttle is high
+                RuleSetThrottle["Rule5"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule5"]);
 
-            // if height is low and Y vel is moderate then throttle is medium
-            RuleSetThrottle["Rule10"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule10"]);
+                // if height is medium and Y vel is moderate then throttle is high
+                RuleSetThrottle["Rule6"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule6"]);
 
-            // if height is low and Y vel is low then throttle is medium
-            RuleSetThrottle["Rule11"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule11"]);
+                // if height is medium and Y vel is low then throttle is medium
+                RuleSetThrottle["Rule7"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule7"]);
 
-            // if height is low and Y vel is safe then throttle is low
-            RuleSetThrottle["Rule12"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule12"]);
+                // if height is medium and Y vel is safe then throttle is low
+                RuleSetThrottle["Rule8"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule8"]);
 
 
-            // if height is landing and Y vel is high then throttle is high
-            RuleSetThrottle["Rule13"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule13"]);
+                // if height is low and Y vel is high then throttle is high
+                RuleSetThrottle["Rule9"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule9"]);
 
-            // if height is landing and Y vel is moderate then throttle is high
-            RuleSetThrottle["Rule14"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule14"]);
+                // if height is low and Y vel is moderate then throttle is medium
+                RuleSetThrottle["Rule10"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule10"]);
 
-            // if height is landing and Y vel is low then throttle  is medium
-            RuleSetThrottle["Rule15"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule15"]);
+                // if height is low and Y vel is low then throttle is medium
+                RuleSetThrottle["Rule11"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule11"]);
 
-            // if height is landing and Y vel is safe then throttle is low
-            RuleSetThrottle["Rule16"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule16"]);
+                // if height is low and Y vel is safe then throttle is low
+                RuleSetThrottle["Rule12"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule12"]);
 
-            RuleSetThrottle["Rule17"] = Rule.IS(height, HeightSets["Below Deck Height"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule17"]);
 
-            RuleSetThrottle["Rule18"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule0"]);
+                // if height is landing and Y vel is high then throttle is high
+                RuleSetThrottle["Rule13"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule13"]);
 
-            RuleSetThrottle["Rule19"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule0"]);
+                // if height is landing and Y vel is moderate then throttle is high
+                RuleSetThrottle["Rule14"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule14"]);
 
-            RuleSetThrottle["Rule20"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule0"]);
+                // if height is landing and Y vel is low then throttle  is medium
+                RuleSetThrottle["Rule15"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule15"]);
+
+                // if height is landing and Y vel is safe then throttle is low
+                RuleSetThrottle["Rule16"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule16"]);
+
+
+                RuleSetThrottle["Rule17"] = Rule.IS(height + 23, HeightSets["Below Deck Height"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule17"]);
+
+                RuleSetThrottle["Rule18"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule18"]);
+
+                RuleSetThrottle["Rule19"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule19"]);
+
+                RuleSetThrottle["Rule20"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule20"]);
+
+                #endregion
+
+            }
+
+            if (Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Easy) ||
+                    Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Medium))
+            {
+
+                #region Y Velocity Height Rules
+
+                // if Y vel is up then throttle is no
+                RuleSetThrottle["Rule0"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule0"]);
+
+                // if height is high and Y vel is high then throttle is medium
+                RuleSetThrottle["Rule1"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule1"]);
+
+                // if height is high and Y vel is moderate then throttle is medium
+                RuleSetThrottle["Rule2"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule2"]);
+
+                // if height is high and Y vel is low then throttle is low
+                RuleSetThrottle["Rule3"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule3"]);
+
+                // if height is high and Y vel is safe then throttle is low
+                RuleSetThrottle["Rule4"] = Rule.AND(height, HeightSets["High Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule4"]);
+
+
+                // if height is medium and Y vel is high then throttle is high
+                RuleSetThrottle["Rule5"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule5"]);
+
+                // if height is medium and Y vel is moderate then throttle is high
+                RuleSetThrottle["Rule6"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule6"]);
+
+                // if height is medium and Y vel is low then throttle is medium
+                RuleSetThrottle["Rule7"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule7"]);
+
+                // if height is medium and Y vel is safe then throttle is low
+                RuleSetThrottle["Rule8"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule8"]);
+
+
+                // if height is low and Y vel is high then throttle is high
+                RuleSetThrottle["Rule9"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule9"]);
+
+                // if height is low and Y vel is moderate then throttle is medium
+                RuleSetThrottle["Rule10"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule10"]);
+
+                // if height is low and Y vel is low then throttle is medium
+                RuleSetThrottle["Rule11"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule11"]);
+
+                // if height is low and Y vel is safe then throttle is low
+                RuleSetThrottle["Rule12"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule12"]);
+
+
+                // if height is landing and Y vel is high then throttle is high
+                RuleSetThrottle["Rule13"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["High Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule13"]);
+
+                // if height is landing and Y vel is moderate then throttle is high
+                RuleSetThrottle["Rule14"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Moderate Velocity"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule14"]);
+
+                // if height is landing and Y vel is low then throttle  is medium
+                RuleSetThrottle["Rule15"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Low Velocity"], ref throttleOutput, ThrottleSets["Medium Throttle"], RuleSetThrottle["Rule15"]);
+
+                // if height is landing and Y vel is safe then throttle is low
+                RuleSetThrottle["Rule16"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Safe Velocity"], ref throttleOutput, ThrottleSets["Low Throttle"], RuleSetThrottle["Rule16"]);
+
+
+                RuleSetThrottle["Rule17"] = Rule.IS(height + 23, HeightSets["Below Deck Height"], ref throttleOutput, ThrottleSets["High Throttle"], RuleSetThrottle["Rule17"]);
+
+                RuleSetThrottle["Rule18"] = Rule.AND(height, HeightSets["Medium Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule18"]);
+
+                RuleSetThrottle["Rule19"] = Rule.AND(height, HeightSets["Low Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule19"]);
+
+                RuleSetThrottle["Rule20"] = Rule.AND(height, HeightSets["Landing Height"], speedY, YVelocitySets["Up Velocity"], ref throttleOutput, ThrottleSets["No Throttle"], RuleSetThrottle["Rule20"]);
+
+                #endregion
+
+            }
 
             #endregion
-
-            #endregion
-
             
             #region Thrust Vector Rules
 
-            #region  X Velocity Left Dangerzone Rules
+            if (Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Hard) ||
+                    Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.VeryHard))
+            {
 
-            #region Rule 0: if distance is left high dangerzone then thrust vector is forward high thrust
+                #region  X Velocity Left Dangerzone Rules
 
-            RuleSetThrustVec["Rule0"] = Rule.IS(safeX, DistanceSets["Left High Dangerzone"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]); 
+                #region Rule 0: if distance is left high dangerzone then thrust vector is forward high thrust
 
-            
-            // if distance is left high dangerzone and X vel is high left then thrust vector is forward high thrust
-            //RuleSetThrustVec["Rule0"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]);
-
-            // if distance is left high dangerzone and X vel is moderate left then thrust vector is forward high thrust
-            //RuleSetThrustVec["Rule1"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule1"]);
-
-            // if distance is left high dangerzone and X vel is Low left then thrust vector is forward high thrust
-            //RuleSetThrustVec["Rule2"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
-
-            // if distance is left high dangerzone and X vel is Neutral then thrust vector is forward high thrust
-            //RuleSetThrustVec["Rule3"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
-            
-
-            #endregion
-
-            // if distance is left moderate dangerzone and X vel is high left then thrust vector is forward high thrust
-            RuleSetThrustVec["Rule1"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule1"]);
-
-            // if distance is left moderate dangerzone and X vel is moderate left then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule2"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule2"]);
-
-            // if distance is left moderate dangerzone and X vel is low left then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule3"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule3"]);
-
-            // if distance is left moderate dangerzone and X vel is neutral then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule4"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule4"]);
+                RuleSetThrustVec["Rule0"] = Rule.IS(safeX, DistanceSets["Left High Dangerzone"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]);
 
 
-            // if distance is left low dangerzone and X vel is high left then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule5"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule5"]);
+                // if distance is left high dangerzone and X vel is high left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule0"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]);
 
-            // if distance is left low dangerzone and X vel is moderate left then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule6"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule6"]);
+                // if distance is left high dangerzone and X vel is moderate left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule1"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule1"]);
 
-            // if distance is left low dangerzone and X vel is low left then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule7"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule7"]);
+                // if distance is left high dangerzone and X vel is Low left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule2"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
 
-            // if distance is left low dangerzone and X vel is high left then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule8"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule8"]);
-
-            #endregion
-
-            #region X Velocity Safezone Rules
-
-            // if distance is safe zone and X vel is high left then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule9"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule9"]);
-
-            // if distance is safe zone and X vel is moderate left then thrust vector is forward moderate thrust
-            RuleSetThrustVec["Rule10"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule10"]);
-
-            // if distance is safe zone and X vel is low left then thrust vector is forward low thrust
-            RuleSetThrustVec["Rule11"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule11"]);
+                // if distance is left high dangerzone and X vel is Neutral then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule3"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
 
 
-            // if distance is safe zone and X vel is neutral then thrust vector is neutral thrust
-            RuleSetThrustVec["Rule12"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Neutral Thrust"], RuleSetThrustVec["Rule12"]);
+                #endregion
+
+                // if distance is left moderate dangerzone and X vel is high left then thrust vector is forward high thrust
+                RuleSetThrustVec["Rule1"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule1"]);
+
+                // if distance is left moderate dangerzone and X vel is moderate left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule2"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule2"]);
+
+                // if distance is left moderate dangerzone and X vel is low left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule3"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule3"]);
+
+                // if distance is left moderate dangerzone and X vel is neutral then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule4"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule4"]);
 
 
-            // if distance is safe zone and X vel is low right then thrust vector is backward low thrust
-            RuleSetThrustVec["Rule13"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule13"]);
+                // if distance is left low dangerzone and X vel is high left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule5"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule5"]);
 
-            // if distance is safe zone and X vel is moderate right then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule14"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule14"]);
+                // if distance is left low dangerzone and X vel is moderate left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule6"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule6"]);
 
-            // if distance is safe zone and X vel is high right then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule15"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule15"]);
+                // if distance is left low dangerzone and X vel is low left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule7"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule7"]);
 
+                // if distance is left low dangerzone and X vel is high left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule8"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule8"]);
 
-            // if distance is safe zone and X vel is moderate right then thrust vector is backward moderate thrust
-            //RuleSetThrustVec[""] = Rule.AND(safeX, DistanceSets[""], speedX, XVelocitySets[""], ref thrustVectorOutput, ThrustVecSets[""], RuleSetThrustVec[""]);
+                #endregion
 
-            #endregion
+                #region X Velocity Safezone Rules
 
-            #region X Velocity Right Dangerzone Rules
+                // if distance is safe zone and X vel is high left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule9"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule9"]);
 
-            #region Rule 16: if distance is right high dangerzone then thrust vector is backward high thrust
+                // if distance is safe zone and X vel is moderate left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule10"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule10"]);
 
-            RuleSetThrustVec["Rule16"] = Rule.IS(safeX, DistanceSets["Right High Dangerzone"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule16"]);
-
-            /*
-            // if distance is left high dangerzone and X vel is high left then thrust vector is forward high thrust
-            RuleSetThrustVec["Rule0"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]);
-
-            // if distance is left high dangerzone and X vel is moderate left then thrust vector is forward high thrust
-            RuleSetThrustVec["Rule1"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule1"]);
-
-            // if distance is left high dangerzone and X vel is Low left then thrust vector is forward high thrust
-            RuleSetThrustVec["Rule2"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
-
-            // if distance is left high dangerzone and X vel is Neutral then thrust vector is forward high thrust
-            RuleSetThrustVec["Rule3"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
-            */
-
-            #endregion
-
-            // if distance is right moderate dangerzone and X vel is high right then thrust vector is backward high thrust
-            RuleSetThrustVec["Rule17"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule17"]);
-
-            // if distance is right moderate dangerzone and X vel is moderate right then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule18"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule18"]);
-
-            // if distance is right moderate dangerzone and X vel is low right then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule19"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule19"]);
-
-            // if distance is right moderate dangerzone and X vel is neutral then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule20"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule20"]);
+                // if distance is safe zone and X vel is low left then thrust vector is forward low thrust
+                RuleSetThrustVec["Rule11"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule11"]);
 
 
-            // if distance is right low dangerzone and X vel is high right then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule21"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule21"]);
+                // if distance is safe zone and X vel is neutral then thrust vector is neutral thrust
+                RuleSetThrustVec["Rule12"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Neutral Thrust"], RuleSetThrustVec["Rule12"]);
 
-            // if distance is right low dangerzone and X vel is moderate right then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule22"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule22"]);
 
-            // if distance is right low dangerzone and X vel is low right then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule23"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule23"]);
+                // if distance is safe zone and X vel is low right then thrust vector is backward low thrust
+                RuleSetThrustVec["Rule13"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule13"]);
 
-            // if distance is right low dangerzone and X vel is high right then thrust vector is backward moderate thrust
-            RuleSetThrustVec["Rule24"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule24"]);
+                // if distance is safe zone and X vel is moderate right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule14"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule14"]);
 
-            #endregion
+                // if distance is safe zone and X vel is high right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule15"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule15"]);
+
+
+                // if distance is safe zone and X vel is moderate right then thrust vector is backward moderate thrust
+                //RuleSetThrustVec[""] = Rule.AND(safeX, DistanceSets[""], speedX, XVelocitySets[""], ref thrustVectorOutput, ThrustVecSets[""], RuleSetThrustVec[""]);
+
+                #endregion
+
+                #region X Velocity Right Dangerzone Rules
+
+                #region Rule 16: if distance is right high dangerzone then thrust vector is backward high thrust
+
+                RuleSetThrustVec["Rule16"] = Rule.IS(safeX, DistanceSets["Right High Dangerzone"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule16"]);
+
+                /*
+                // if distance is left high dangerzone and X vel is high left then thrust vector is forward high thrust
+                RuleSetThrustVec["Rule0"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]);
+
+                // if distance is left high dangerzone and X vel is moderate left then thrust vector is forward high thrust
+                RuleSetThrustVec["Rule1"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule1"]);
+
+                // if distance is left high dangerzone and X vel is Low left then thrust vector is forward high thrust
+                RuleSetThrustVec["Rule2"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
+
+                // if distance is left high dangerzone and X vel is Neutral then thrust vector is forward high thrust
+                RuleSetThrustVec["Rule3"] = Rule.AND(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule3"]);
+                */
+
+                #endregion
+
+                // if distance is right moderate dangerzone and X vel is high right then thrust vector is backward high thrust
+                RuleSetThrustVec["Rule17"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule17"]);
+
+                // if distance is right moderate dangerzone and X vel is moderate right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule18"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule18"]);
+
+                // if distance is right moderate dangerzone and X vel is low right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule19"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule19"]);
+
+                // if distance is right moderate dangerzone and X vel is neutral then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule20"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule20"]);
+
+
+                // if distance is right low dangerzone and X vel is high right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule21"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule21"]);
+
+                // if distance is right low dangerzone and X vel is moderate right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule22"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule22"]);
+
+                // if distance is right low dangerzone and X vel is low right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule23"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule23"]);
+
+                // if distance is right low dangerzone and X vel is high right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule24"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule24"]);
+
+                #endregion
+
+            }
+
+            if (Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Easy) ||
+                    Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Medium))
+            {
+
+                #region  X Velocity Left Dangerzone Rules
+
+                #region Rule 0: if distance is left high dangerzone then thrust vector is forward high thrust
+
+                RuleSetThrustVec["Rule0"] = Rule.IS(safeX, DistanceSets["Left High Dangerzone"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule0"]);
+
+
+                //// if distance is left high dangerzone and X vel is high left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule0"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule0"]);
+
+                //// if distance is left high dangerzone and X vel is moderate left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule29"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule29"]);
+
+                //// if distance is left high dangerzone and X vel is Low left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule30"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule30"]);
+
+                //// if distance is left high dangerzone and X vel is Neutral then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule31"] = Rule.OR(safeX, DistanceSets["Left High Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule31"]);
+
+
+                #endregion
+
+                // if distance is left moderate dangerzone and X vel is high left then thrust vector is forward high thrust
+                RuleSetThrustVec["Rule1"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule1"]);
+
+                // if distance is left moderate dangerzone and X vel is moderate left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule2"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule2"]);
+
+                // if distance is left moderate dangerzone and X vel is low left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule3"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule3"]);
+
+                // if distance is left moderate dangerzone and X vel is neutral then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule4"] = Rule.AND(safeX, DistanceSets["Left Moderate Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule4"]);
+
+
+                // if distance is left low dangerzone and X vel is high left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule5"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule5"]);
+
+                // if distance is left low dangerzone and X vel is moderate left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule6"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule6"]);
+
+                // if distance is left low dangerzone and X vel is low left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule7"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule7"]);
+
+                // if distance is left low dangerzone and X vel is high left then thrust vector is forward moderate thrust
+                RuleSetThrustVec["Rule8"] = Rule.AND(safeX, DistanceSets["Left Low Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule8"]);
+
+                #endregion
+
+                #region X Velocity Safezone Rules
+
+                if (Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Easy))
+                {
+
+                    // if distance is safe zone and X vel is high left then thrust vector is forward moderate thrust
+                    RuleSetThrustVec["Rule9"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule9"]);
+
+                    // if distance is safe zone and X vel is moderate left then thrust vector is forward moderate thrust
+                    RuleSetThrustVec["Rule10"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule10"]);
+
+                    // if distance is safe zone and X vel is low left then thrust vector is forward low thrust
+                    RuleSetThrustVec["Rule11"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule11"]);
+
+
+                    // if distance is safe zone and X vel is neutral then thrust vector is neutral thrust
+                    RuleSetThrustVec["Rule12"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Neutral Thrust"], RuleSetThrustVec["Rule12"]);
+
+
+                    // if distance is safe zone and X vel is low right then thrust vector is backward low thrust
+                    RuleSetThrustVec["Rule13"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule13"]);
+
+                    // if distance is safe zone and X vel is moderate right then thrust vector is backward moderate thrust
+                    RuleSetThrustVec["Rule14"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule14"]);
+
+                    // if distance is safe zone and X vel is high right then thrust vector is backward moderate thrust
+                    RuleSetThrustVec["Rule15"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule15"]);
+
+
+                    // if distance is safe zone and X vel is moderate right then thrust vector is backward moderate thrust
+                    //RuleSetThrustVec[""] = Rule.AND(safeX, DistanceSets[""], speedX, XVelocitySets[""], ref thrustVectorOutput, ThrustVecSets[""], RuleSetThrustVec[""]);
+                }
+
+                if (Globals.Simulator.Difficulty.Equals(SimDifficultyEnum.Medium))
+                {
+
+                    // if distance is safe zone and X vel is high left then thrust vector is forward moderate thrust
+                    RuleSetThrustVec["Rule9"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward High Thrust"], RuleSetThrustVec["Rule9"]);
+
+                    // if distance is safe zone and X vel is moderate left then thrust vector is forward moderate thrust
+                    RuleSetThrustVec["Rule10"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Moderate Thrust"], RuleSetThrustVec["Rule10"]);
+
+                    // if distance is safe zone and X vel is low left then thrust vector is forward low thrust
+                    RuleSetThrustVec["Rule11"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Forward Low Thrust"], RuleSetThrustVec["Rule11"]);
+
+
+                    // if distance is safe zone and X vel is neutral then thrust vector is neutral thrust
+                    RuleSetThrustVec["Rule12"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Neutral Thrust"], RuleSetThrustVec["Rule12"]);
+
+
+                    // if distance is safe zone and X vel is low right then thrust vector is backward low thrust
+                    RuleSetThrustVec["Rule13"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule13"]);
+
+                    // if distance is safe zone and X vel is moderate right then thrust vector is backward moderate thrust
+                    RuleSetThrustVec["Rule14"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule14"]);
+
+                    // if distance is safe zone and X vel is high right then thrust vector is backward moderate thrust
+                    RuleSetThrustVec["Rule15"] = Rule.AND(safeX, DistanceSets["Safe Zone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule15"]);
+
+
+                    // if distance is safe zone and X vel is moderate right then thrust vector is backward moderate thrust
+                    //RuleSetThrustVec[""] = Rule.AND(safeX, DistanceSets[""], speedX, XVelocitySets[""], ref thrustVectorOutput, ThrustVecSets[""], RuleSetThrustVec[""]);
+                }
+
+                #endregion
+
+                #region X Velocity Right Dangerzone Rules
+
+                #region Rule 16: if distance is right high dangerzone then thrust vector is backward high thrust
+
+                RuleSetThrustVec["Rule16"] = Rule.IS(safeX, DistanceSets["Right High Dangerzone"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule16"]);
+
+                
+                //// if distance is left high dangerzone and X vel is high left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule25"] = Rule.AND(safeX, DistanceSets["Right High Dangerzone"], speedX, XVelocitySets["High Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule25"]);
+
+                //// if distance is left high dangerzone and X vel is moderate left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule26"] = Rule.AND(safeX, DistanceSets["Right High Dangerzone"], speedX, XVelocitySets["Moderate Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule26"]);
+
+                //// if distance is left high dangerzone and X vel is Low left then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule27"] = Rule.AND(safeX, DistanceSets["Right High Dangerzone"], speedX, XVelocitySets["Low Left Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule27"]);
+
+                //// if distance is left high dangerzone and X vel is Neutral then thrust vector is forward high thrust
+                //RuleSetThrustVec["Rule28"] = Rule.AND(safeX, DistanceSets["Right High Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule28"]);
+                
+
+                #endregion
+
+                // if distance is right moderate dangerzone and X vel is high right then thrust vector is backward high thrust
+                RuleSetThrustVec["Rule17"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward High Thrust"], RuleSetThrustVec["Rule17"]);
+
+                // if distance is right moderate dangerzone and X vel is moderate right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule18"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule18"]);
+
+                // if distance is right moderate dangerzone and X vel is low right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule19"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule19"]);
+
+                // if distance is right moderate dangerzone and X vel is neutral then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule20"] = Rule.AND(safeX, DistanceSets["Right Moderate Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule20"]);
+
+
+                // if distance is right low dangerzone and X vel is high right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule21"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["High Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule21"]);
+
+                // if distance is right low dangerzone and X vel is moderate right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule22"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Moderate Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Moderate Thrust"], RuleSetThrustVec["Rule22"]);
+
+                // if distance is right low dangerzone and X vel is low right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule23"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Low Right Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule23"]);
+
+                // if distance is right low dangerzone and X vel is high right then thrust vector is backward moderate thrust
+                RuleSetThrustVec["Rule24"] = Rule.AND(safeX, DistanceSets["Right Low Dangerzone"], speedX, XVelocitySets["Neutral Velocity"], ref thrustVectorOutput, ThrustVecSets["Backward Low Thrust"], RuleSetThrustVec["Rule24"]);
+
+                #endregion
+
+            }
 
             #endregion
             
